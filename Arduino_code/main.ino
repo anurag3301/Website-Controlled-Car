@@ -17,11 +17,12 @@ void receiveEvents(int numBytes)
 }
 
 void forward(){
-  digitalWrite(right_forward_pin, HIGH);
-  digitalWrite(left_forward_pin, HIGH);
-  digitalWrite(right_forward_pin, LOW);
-  digitalWrite(left_forward_pin, LOW);
+  analogWrite(right_backward_pin, 255);
+  analogWrite(left_backward_pin, 255);
+  analogWrite(right_forward_pin, 0);
+  analogWrite(left_forward_pin, 0);
 }
+
 
 void setup()
 {
