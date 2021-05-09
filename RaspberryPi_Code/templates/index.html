@@ -1,9 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>RC Controller</title>
-</head>
-<body>
-    <h1>RC Controller for {{name}}</h1>
-</body>
-</html>
+{% extends "layout.html" %}
+
+{% block body %}
+
+<h1>Register</h1>
+<form action="/register" method="POST">
+    <input autocomplete="off" autofocus name="name" placeholder="Name" type="text">
+    <select name="sport">
+        <option disabled selected value="">Sport</option>
+        <option value="Dogeball">Dogeball</option>
+        <option value="Football">Football</option>
+        <option value="Fucker">fucker</option>
+        <option value="Tennis">Tennis</option>
+        <option value="Socker">Socker</option>
+    </select>
+    <input type="submit" value="Register">
+</form>
+
+{% endblock %}
