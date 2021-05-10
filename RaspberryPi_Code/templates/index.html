@@ -80,7 +80,7 @@ setInterval(function(){
             'Content-Type': 'application/json'
         },
         method: 'POST',
-        body: JSON.stringify({"joy1iX": joy1IinputPosX, "joy1Y": joy1InputPosY, "joy2X": joy2IinputPosX, "joy2Y": joy2InputPosY})
+        body: JSON.stringify({"joy1X": joy1IinputPosX, "joy1Y": joy1InputPosY, "joy2X": joy2IinputPosX, "joy2Y": joy2InputPosY})
     })
         .then(function (response) {
             return response.text();
