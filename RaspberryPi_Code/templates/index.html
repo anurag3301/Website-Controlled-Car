@@ -6,7 +6,7 @@
 		<meta name="description" content="Example page of use pure Javascript JoyStick">
 		<meta name="author" content="Roberto D'Amico">
 		<link rel="shortcut icon" type="image/png" href="http://bobboteck.github.io/img/roberto-damico-bobboteck.png">
-    <link rel="stylesheet" type= "text/css" href="{{ url_for('static',filename='style.css') }}">
+    	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>	<link rel="stylesheet" type= "text/css" href="{{ url_for('static',filename='style.css') }}">
 		<script src="{{ url_for('static',filename='joy.js') }}"></script>
 	</head>
 
@@ -55,6 +55,7 @@ setInterval(function(){ joy1InputPosY=Joy1.GetPosY(); }, 50);
 setInterval(function(){ joy1Direzione=Joy1.GetDir(); }, 50);
 setInterval(function(){ joy1X=Joy1.GetX(); }, 50);
 setInterval(function(){ joy1Y=Joy1.GetY(); }, 50);
+
 // setInterval(function(){ console.log(1, joy1IinputPosX, joy1InputPosY, joy1Direzione, joy1X, joy1Y); }, 50);
 
 
@@ -73,7 +74,23 @@ setInterval(function(){ joy2X=Joy2.GetX(); }, 50);
 setInterval(function(){ joy2Y=Joy2.GetY(); }, 50);
 // setInterval(function(){ console.log(2, joy2IinputPosX, joy2InputPosY, joy2Direzione, joy2X, joy2Y); }, 50);
 
+setInterval(function(){
+	 fetch('/hello', {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        method: 'POST',
+        body: JSON.stringify({"joy1iX": joy1IinputPosX, "joy1Y": joy1InputPosY, "joy2X": joy2IinputPosX, "joy2Y": joy2InputPosY})
+    })
+        .then(function (response) {
+            return response.text();
+        })
+        .then(function (text) {
 
+            console.log('POST response: ');
+            console.log(text);
+        });
+}, 50);
 
 	</script>
 	</body>
