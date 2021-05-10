@@ -12,6 +12,7 @@ body
 {
 	display: inline-flex;
 	clear: both;
+  float: top;
 }
 .columnLateral
 {
