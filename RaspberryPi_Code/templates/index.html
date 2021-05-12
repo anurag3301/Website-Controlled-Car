@@ -3,9 +3,7 @@
 	<head>
 		<title>Joy</title>
 		<meta charset="utf-8">
-		<meta name="description" content="Example page of use pure Javascript JoyStick">
-		<meta name="author" content="Roberto D'Amico">
-		<link rel="shortcut icon" type="image/png" href="http://bobboteck.github.io/img/roberto-damico-bobboteck.png">
+		<meta name="description" content="Remote controll for your car!!!!">
     	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>	<link rel="stylesheet" type= "text/css" href="{{ url_for('static',filename='style.css') }}">
 		<script src="{{ url_for('static',filename='joy.js') }}"></script>
 	</head>
@@ -15,33 +13,19 @@
 		<div class="row">
 			<div class="columnLateral">
 				<div id="joy1Div" style="width:200px;height:200px;margin:50px"></div>
-				<!--
-				Posizione X:<input id="joy1PosizioneX" type="text" /><br />
-				Posizione Y:<input id="joy1PosizioneY" type="text" /><br />
-				Direzione:<input id="joy1Direzione" type="text" /><br />
-				X :<input id="joy1X" type="text" /></br>
-				Y :<input id="joy1Y" type="text" />
-				-->
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="columnLateral">
 				<div id="joy2Div" style="width:200px;height:200px;margin:50px"></div>
-				<!--
-				Posizione X:<input id="joy2PosizioneX" type="text" /><br />
-				Posizione Y:<input id="joy2PosizioneY" type="text" /><br />
-				Direzione:<input id="joy2Direzione" type="text" /><br />
-				X :<input id="joy2X" type="text" /></br>
-				Y :<input id="joy2Y" type="text" />
-				-->
 			</div>
 		</div>
 
 
 		<script type="text/javascript">
-// Create JoyStick object into the DIV 'joy1Div'
 
+// Create JoyStick object into the DIV 'joy1Div'
 var Joy1 = new JoyStick('joy2Div');
 
 var joy1IinputPosX = Joy1.GetPosX();
@@ -52,9 +36,9 @@ var joy1Y = Joy1.GetY;
 
 setInterval(function(){ joy1IinputPosX=Joy1.GetPosX(); }, 50);
 setInterval(function(){ joy1InputPosY=Joy1.GetPosY(); }, 50);
-// setInterval(function(){ console.log(1, joy1IinputPosX, joy1InputPosY, joy1Direzione, joy1X, joy1Y); }, 50);
 
 
+// Create JoyStick object into the DIV 'joy2Div'
 var Joy2 = new JoyStick('joy2Div');
 
 var joy2IinputPosX = Joy2.GetPosX();
@@ -65,10 +49,9 @@ var joy2Y = Joy2.GetY;
 
 setInterval(function(){ joy2IinputPosX=Joy2.GetPosX(); }, 50);
 setInterval(function(){ joy2InputPosY=Joy2.GetPosY(); }, 50);
-// setInterval(function(){ console.log(2, joy2IinputPosX, joy2InputPosY, joy2Direzione, joy2X, joy2Y); }, 50);
 
 setInterval(function(){
-	 fetch('/hello', {
+	 fetch('/send', {
         headers: {
             'Content-Type': 'application/json'
         },

@@ -8,7 +8,7 @@ def _map(x, in_min, in_max, out_min, out_max):
     return val if val > 0 else 0
 
 
-@app.route('/hello', methods=['GET', 'POST'])
+@app.route('/send', methods=['GET', 'POST'])
 def data():
     global pwm_data 
     # POST request
@@ -25,20 +25,18 @@ def data():
         right_pwm =  _map(joy2Y, 100, 150, 0, 255)
         left_pwm =  _map(joy2Y, 100, 50, 0, 255)
 
-        right_forward_pwm = forward_pwm if forward_pwm > 0 else 0
-        left_forward_pwm = forward_pwm if forward_pwm > 0 else 0
-        right_backward_pwm = backward_pwm if backward_pwm > 0 else 0
-        left_backward_pwm = backward_pwm if backward_pwm> 0 else 0
+        right_forward_pwm = max(0, forward_pwm - right_pwm)
+        left_forward_pwm = max(0, forward_pwm - left_pwm)
+        right_backward_pwm = max(0, backward_pwm - right_pwm)
+        left_backward_pwm = max(0, backward_pwm - left_pwm)
+
+        pwm_data = [right_forward_pwm, left_forward_pwm, right_backward_pwm, left_backward_pwm, 0]
+
+        print(pwm_data)
 
         with open("/home/pi/server/pwmVal.txt", "w") as f:
             f.write(str(pwm_data[0]) + " " + str(pwm_data[1]) + " " + str(pwm_data[2]) + " " + str(pwm_data[3]) + " " +str(pwm_data[4]))
-        pwm_data = [right_forward_pwm, left_forward_pwm, right_backward_pwm, left_backward_pwm, 0]
         return 'OK', 200
-
-    # GET request
-    else:
-        message = {'greeting':'Hello from Flask!'}
-        print(jsonify(message))
 
 @app.route('/')
 def hello():
