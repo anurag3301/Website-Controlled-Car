@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, jsonify
 app = Flask(__name__)
 pwm_data = [0, 0, 0, 0, 0] 
 
+# this function replicate the map function of arduino
 def _map(x, in_min, in_max, out_min, out_max):
     val = int((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min)
     return val if val > 0 else 0
@@ -33,9 +34,11 @@ def data():
         pwm_data = [right_forward_pwm, left_forward_pwm, right_backward_pwm, left_backward_pwm, 0]
 
         print(pwm_data)
-
+        
+        # write the pwm values to the txt file
         with open("/home/pi/server/pwmVal.txt", "w") as f:
             f.write(str(pwm_data[0]) + " " + str(pwm_data[1]) + " " + str(pwm_data[2]) + " " + str(pwm_data[3]) + " " +str(pwm_data[4]))
+        
         return 'OK', 200
 
 @app.route('/')

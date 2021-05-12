@@ -5,6 +5,7 @@
 int led_pin = 19;
 int led_state = LOW;
 
+// make sure all the below pin below should be PWM enabled
 int right_forward_pin = 7;
 int left_forward_pin = 8;
 int right_backward_pin = 4;
@@ -17,19 +18,22 @@ int left_backward_pwm = 0;
 
 int pwm_values[6] = {0, 0, 0, 0, 0, 0};
 
+// This function is called when ever there is I2C receive call
 void receiveEvents(int numBytes){  
-  Serial.println(F("-----Got the data!!!----"));
+  Serial.println("----GOT " + String(numBytes) + " Bytes-----");
   int counter = 0;
   while (Wire.available()){
     int pwm = Wire.read();
     pwm_values[counter] = pwm;
     counter++;
   }
+  //Update the global pwm variable
   right_forward_pwm = pwm_values[1];
   left_forward_pwm = pwm_values[2];
   right_backward_pwm = pwm_values[3];
   left_backward_pwm = pwm_values[4];
   led_state = pwm_values[5];
+  // Print out the updated pwm values
   Serial.println(right_forward_pwm);
   Serial.println(left_forward_pwm);
   Serial.println(right_backward_pwm );
@@ -37,6 +41,7 @@ void receiveEvents(int numBytes){
   Serial.println(led_state);
 } 
 
+// This function sends the pwm signal to motor driver to rotate the motors
 void move(){
   analogWrite(right_forward_pin, right_forward_pwm);
   analogWrite(left_forward_pin, left_forward_pwm);

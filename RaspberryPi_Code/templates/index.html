@@ -1,3 +1,12 @@
+<!--
+	--------------------------------------------IMPORTANT NOTE -----------------------------------------------
+
+	I have NOT created the joystick javascript module, the real creator of the joy.js is Roberto D'Amico aka Bobboteck
+	Here is the link to the original GitHub Repo https://github.com/bobboteck/JoyStick
+	Here is the link to the article https://www.cssscript.com/onscreen-joystick/
+
+-->
+
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -34,6 +43,7 @@ var joy1Direzione = Joy1.GetDir()
 var joy1X = Joy1.GetX;
 var joy1Y = Joy1.GetY;
 
+// Fetch joystick 1 position every 50 ms
 setInterval(function(){ joy1IinputPosX=Joy1.GetPosX(); }, 50);
 setInterval(function(){ joy1InputPosY=Joy1.GetPosY(); }, 50);
 
@@ -47,9 +57,11 @@ var joy2Direzione = Joy2.GetDir()
 var joy2X = Joy2.GetX;
 var joy2Y = Joy2.GetY;
 
+// Fetch joystick 2 position every 50 ms
 setInterval(function(){ joy2IinputPosX=Joy2.GetPosX(); }, 50);
 setInterval(function(){ joy2InputPosY=Joy2.GetPosY(); }, 50);
 
+// Do a POST request to Flask backend every 50 ms
 setInterval(function(){
 	 fetch('/send', {
         headers: {
