@@ -1,5 +1,6 @@
 # Website-Controlled-Car V1
 This is fun project made by me in which you can control a Arduino RC car through any device using browser. Im hosting a web server on a raspberry pi which will work as the remote controller. Here is the archetecture behind it so far.
+#### Check the working demo of the project [HERE](https://youtu.be/WVhgLSC9BpA)
 ## The Archetecture
 ![Archetecture](https://i.ibb.co/tpj3FGW/Untitled-document-1.png)
 ## The Workflow
@@ -12,6 +13,5 @@ This is fun project made by me in which you can control a Arduino RC car through
 + Then an another python program named `i2c.py` is executed, this program read the pwm vaues from the pwmVal.txt file and send the pwmValues to arduino though the I2C bus
 + No the arduino fetches the pwm valus and run motors according to the pwm values. 
 
-#### Check the working demo of the project [HERE](https://youtu.be/WVhgLSC9BpA)
 
 ### Hope you understood the project, if you have any doubt so post the query in the [discussion section](https://github.com/anurag3301/Website-Controlled-Car/discussions).
